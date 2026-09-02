@@ -25,4 +25,17 @@ export default defineConfig({
     port: 47391,
     strictPort: true,
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id: string) {
+          if (id.includes("node_modules/react-dom")) return "react-dom";
+          if (id.includes("node_modules/react")) return "react";
+          if (id.includes("node_modules/@radix-ui")) return "radix";
+          if (id.includes("node_modules/lucide-react")) return "lucide";
+          if (id.includes("/src/engine/")) return "engine";
+        },
+      },
+    },
+  },
 });
