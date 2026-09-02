@@ -77,7 +77,11 @@ npm run build
 
 `npm run build` emits static files in `dist/`. Local/dev uses a relative Vite `base` (`./`). GitHub Pages builds with `GITHUB_PAGES=true`, which sets `base` to `/access-grant-room/` so assets load at https://arshgill01.github.io/access-grant-room/.
 
-CI (`.github/workflows/pages.yml`) runs `npm ci && npm test && npm run build` on `main` and publishes `dist` to GitHub Pages (and mirrors `gh-pages`). Netlify: `netlify.toml` already points `publish` at `dist`.
+The public demo is served from the `gh-pages` branch. `docs/` in `main` is the same relative-base static snapshot (including the vendor `react-dom` chunk).
+
+To rebuild Pages from source on each push to `main`, copy `github-pages-workflow.yml` to `.github/workflows/pages.yml` (requires the `workflow` scope on the GitHub token). That workflow runs `npm ci && npm test && npm run build` with `GITHUB_PAGES=true` and publishes `dist/`. Netlify: `netlify.toml` already points `publish` at `dist`.
+
+If GitHub still shows an empty `master` branch as default, switch **Settings → General → Default branch** to `main`.
 
 ## Tests
 
